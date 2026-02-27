@@ -11,6 +11,69 @@ Gain more practical experience by using this repository that contains a Python W
 1. Enable your [GitHub Copilot service](https://github.com/github-copilot/signup)
 1. Open [this repository with Codespaces](https://codespaces.new/MicrosoftDocs/mslearn-copilot-codespaces-python)
 
+## Running the project
+
+These steps assume you have Python 3.10+ installed.
+
+1. **Clone the repository** and change into the directory:
+
+    ```sh
+    git clone <repo‑url>
+    cd mslearn-advanced-copilot
+    ```
+
+2. **Create and activate a virtual environment**:
+
+    ```sh
+    python -m venv .venv
+    # on macOS / Linux
+    source .venv/bin/activate
+    # on Windows (PowerShell)
+    .venv\Scripts\Activate.ps1
+    ```
+
+3. **Install the dependencies**:
+
+    ```sh
+    pip install --upgrade pip
+    pip install -r requirements.txt
+    ```
+
+4. **Start the API server** with Uvicorn:
+
+    ```sh
+    uvicorn main:app --reload
+    ```
+
+    By default the app listens on `http://localhost:8000`; open that URL
+    in your browser or visit `http://localhost:8000/docs` to see the
+    automatically generated OpenAPI/Swagger UI.
+
+    If you are using the devcontainer, the `postAttachCommand` in
+    [devcontainer.json](http://_vscodecontentref_/1) already runs this for you.
+
+5. **Run the tests**:
+
+    The project uses the built‑in unittest runner; the example suite lives
+    in [test_main.py](http://_vscodecontentref_/2).
+
+    ```sh
+    python -m unittest -v
+    ```
+
+    (or `pytest` if you prefer – the same tests will be discovered.)
+
+6. **Explore the API**
+
+    - [GET /countries](http://_vscodecontentref_/3) – list all countries in [weather.json](http://_vscodecontentref_/4).
+    - [GET /countries/{country}/cities](http://_vscodecontentref_/5) – list cities for a country.
+    - [GET /countries/{country}/{city}/{month}](http://_vscodecontentref_/6) – historical high/low.
+
+    You can try these endpoints from the Swagger UI or using `curl`/`httpx`.
+
+With these instructions in place, other developers should be able to clone,
+install, run and test the service quickly.
+
 ## 💪🏽 Exercise
 The current API is not exposing country/{country} which needs to be implemented to list cities. The route should allow only GET HTTP requests with a JSON response providing information from the historical high and low for that country, city, and given month.
 
